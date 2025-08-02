@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔镜生日礼物</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Amatic+SC:wght@400;700&family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&family=Sacramento&family=Satisfy&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="logo">Zilin小仙女的主页</div>
+        <ul class="menu">
+            <li><a href="#mirror">真话魔镜</a></li>
+            <li><a href="#storybook">童话故事书</a></li>
+            <li><a href="#album">心动相册</a></li>
+            <li><a href="#wishes">祝福星愿墙</a></li>
+            <li><a href="#countdown">生日倒计时</a></li>
+            <li><a href="#games">小游戏乐园</a></li>
+        </ul>
+    </nav>
+
+    <!-- 右侧进度指示器 -->
+    <div class="progress-indicator">
+        <ul>
+            <li data-section="mirror"></li>
+            <li data-section="storybook"></li>
+            <li data-section="album"></li>
+            <li data-section="wishes"></li>
+            <li data-section="countdown"></li>
+            <li data-section="games"></li>
+        </ul>
+    </div>
+
+    <!-- SPA 主内容区域 -->
+    <main>
+        <section id="mirror" class="page-section">
+            <div class="mirror-bg">
+                <canvas id="starfield"></canvas>
+                <div class="magic-mirror-container">
+                    <div class="magic-mirror">
+                        <div class="mirror-glow"></div>
+                        <div class="mirror-face">
+                            <div class="mirror-breath"></div>
+                            <div class="mirror-response" id="mirrorResponse"></div>
+                        </div>
+                    </div>
+                    <form class="mirror-input-form" id="mirrorInputForm">
+                        <input type="text" id="mirrorInput" placeholder="试试说: Zilin、谁最美、生日快乐、爱你..." autocomplete="off" />
+                        <button type="submit">发送</button>
+                    </form>
+                    <div class="mirror-tips">
+                        <p>💡 试试这些话题：</p>
+                        <div class="tips-buttons">
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='Zilin'">夸夸Zilin</button>
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='谁最美'">谁最美</button>
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='生日快乐'">生日祝福</button>
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='爱你'">表达爱意</button>
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='开心'">分享心情</button>
+                            <button class="tip-btn" onclick="document.getElementById('mirrorInput').value='你是谁'">认识魔镜</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="storybook" class="page-section">
+            <div class="storybook-container">
+                <h2 class="section-title">我们的童话故事</h2>
+                <div id="storybook-flipbook" class="flipbook">
+                    <!-- 封面 -->
+                    <div class="page page-cover">
+                        <div class="page-content">
+                            <h1>Our Fairy Tale</h1>
+                            <p>献给最美的Zilin</p>
+                            <div class="cover-decoration">✨</div>
+                        </div>
+                    </div>
+                    <!-- 第一章 -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3>第一章：相遇</h3>
+                            <p>时间回到刚遇到你的时候，那是你的家人招待我们吃饭，你穿着一身棕色的长裙，很得体，很端庄，但也是真高冷...都没怎么打正眼瞧我。之后聊起来你缠着我问过很多次到底第一次见面对你是什么感觉，到底有没有
+                            </p>
+                            
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            <p>被你吸引，我一直在打趣的说“第一次见面就观察那么细不成流氓了吗”，或者是“嗯还可以，挺好看的”，你便悻悻地走开。事实是那个时候，我当然对你有好感，但是更多是对超越这个年纪的成熟和从容感的欣赏…</p>
+                        
+                        </div>
+                    </div>
+                    <!-- 第二章 -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3>第二章：相识</h3>
+                            <p>在一起的那天，是我第一次怂成那样子。在脑中排演了很多遍告白的词，给自己打气，喝酒壮胆，还是没等迈出那一步，如果没有你给的台阶，我还挺好奇说出来的告白会是什么感觉...</p>
+                            
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            
+                            <p>可能遗憾才能催人成长吧，从那之后我就在心里发誓要成为一个合格的男朋友，至少目前在情感上，我有信心能给你爱情中最需要的--理解和包容。我不够成熟，或许是闲散惯了，</p>
+                            
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            
+                            <p>这一年中很多事情在之前都不是我需要考虑的，当这些事情发生，我可能会意气用事，和你发生争执，但这或许是太想像一个男人一样为我们的二人世界独当一面的负面结果吧。不过就是有一些事，之前没做过没关系，但我会为我们二人的小世界负起责任...</p>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            <p>仔细想想，你--我可爱的小猪，填满了我来英国之后的所有回忆。先陪我见证了神奇的冬令时，回想起来，我似乎所有的回忆都伴随着夜晚，似乎冬令时之后就迎来了极夜...那时我们经常晚餐跑去吃漂亮饭，</p>
+
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            
+                            <p>实在是给了我英国物价的一点小震撼...我们手捧香槟在第一排看完了震撼的歌剧魅影...你陪我挑了人生中的第一件大衣...在winter wonderland抓到大狗狗时你开心得合不拢嘴...我圣诞节偷偷跑去给你惊喜时你的激动的神情...</p>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            
+                            <p>“极夜”过后的日子，我的记忆里涌入了各种各样的地方，从冰岛 爱丁堡 西班牙 葡萄牙，到埃及 南京 苏州 上海 太原 北京 韩国~确实给我带来了不小的文化冲击，在冰岛爬过冰川，在西班牙吹过海风，</p>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            
+                            <p>埃及的物价水深让我们心惊胆战，南京苏州的美食让我们留恋，北京我们拍了情侣艺术照，在韩国大胆体验了什么叫潮流...这些地方固然有特色，但与你在一起的时光才让这些经历变得更难忘。</p>
+                        </div>
+                    </div>
+                    <!-- 第三章 -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3>第三章：相守</h3>
+                            <p>转眼都快要一周年了，我们的日子没那么热烈了吗？我想是的。粗茶淡饭，闲言碎语，本就是生活常态，但平静不意味着平淡，安静的日子里，我们创造独属我们二人的回忆。未来的日子虽未可知，但我想对你说...</p>
+                            
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="page-content">
+                            <p>在每一个生日，每一个纪念日，</p>
+                            <p>都要记得：我爱你。</p>
+                            
+                        </div>
+                    </div>
+                    <!-- 背面 -->
+                    <div class="page page-back">
+                        <div class="page-content">
+                            <p>The End</p>
+                            <p>...其实是新的开始</p>
+                            <div class="page-decoration">💕</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipbook-controls">
+                    <button id="prevPage" class="flip-btn">上一页</button>
+                    <span class="page-indicator">第 <span id="currentPage">1</span> / <span id="totalPages">12</span> 页</span>
+                    <button id="nextPage" class="flip-btn">下一页</button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="album" class="page-section">
+            <div class="album-container">
+                <h2 class="section-title">心动相册</h2>
+                <div class="photo-gallery" id="photoGallery">
+                    <!-- 示例照片项 -->
+                    <div class="photo-item" data-year="2024" data-date="2024.05.20">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194624.jpg" alt="第一次约会">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2024.10.17</div>
+                                <div class="photo-title">第一次约会</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.07.07">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194644.jpg" alt="万圣节">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2024.10.31</div>
+                                <div class="photo-title">万圣节</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2023" data-date="2023.10.01">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194651.jpg" alt="第一次看歌剧">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2024.12.01</div>
+                                <div class="photo-title">第一次看歌剧</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2023" data-date="2023.12.25">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194752.jpg" alt="Winter Wonderland">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2024.12.06</div>
+                                <div class="photo-title">Winter Wonderland</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194916.jpg" alt="第一个圣诞节">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2024.12.24</div>
+                                <div class="photo-title">第一个圣诞节</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="special" data-date="2024.05.20">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727194922.jpg" alt="新年夜">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.01.01</div>
+                                <div class="photo-title">新年夜</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195016.jpg" alt="冰岛历险">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.01.09</div>
+                                <div class="photo-title">冰岛历险</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195025.jpg" alt="第一个情人节">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.02.14</div>
+                                <div class="photo-title">第一个情人节</div>
+                                <div class="photo-description">玫瑰花和巧克力，但最美的是你</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195032.jpg" alt="第一次滑雪">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.02.22</div>
+                                <div class="photo-title">第一次滑雪</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195036.jpg" alt="夏日海边">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.04.08</div>
+                                <div class="photo-title">夏日海边</div>
+                                <div class="photo-description">阳光、沙滩、还有你的笑容</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195243.jpg" alt="5~2~0">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.05.20</div>
+                                <div class="photo-title">5~2~0</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-year="2024" data-date="2024.02.14">
+                        <div class="photo-wrapper">
+                            <img src="birthday\微信图片_20250727195314.jpg" alt="一起回家">
+                            <div class="photo-overlay">
+                                <div class="photo-date">2025.06.22</div>
+                                <div class="photo-title">一起回家</div>
+                                <div class="photo-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-modal" id="photoModal">
+                    <span class="modal-close">&times;</span>
+                    <img class="modal-content" id="modalImg">
+                    <div class="modal-caption" id="modalCaption"></div>
+                </div>
+            </div>
+        </section>
+        <section id="wishes" class="page-section">
+            <div class="wishes-container">
+                <h2 class="section-title">祝福星愿墙</h2>
+                <p class="wishes-subtitle">点击星星查看祝福，让每颗星都承载着满满的爱意</p>
+                <canvas id="wishStarsCanvas" class="wish-stars-canvas"></canvas>
+                <div class="wish-controls">
+                    <button class="wish-btn" id="addWishBtn">✨ 许下愿望</button>
+                    <button class="wish-btn" id="showAllWishesBtn">🌟 查看所有祝福</button>
+                </div>
+                
+                <!-- 愿望卡片模态框 -->
+                <div class="wish-modal" id="wishModal">
+                    <div class="wish-modal-content">
+                        <span class="wish-modal-close">&times;</span>
+                        <div class="wish-card">
+                            <div class="wish-card-header">
+                                <span class="wish-type" id="wishType">💝</span>
+                                <h3 id="wishTitle">生日祝福</h3>
+                            </div>
+                            <div class="wish-card-body">
+                                <p id="wishContent">愿你的每一天都充满阳光和笑容！</p>
+                                <div class="wish-card-footer">
+                                    <span class="wish-date" id="wishDate">2024.07.25</span>
+                                    <span class="wish-author" id="wishAuthor">❤️ 来自爱你的人</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 添加愿望模态框 -->
+                <div class="add-wish-modal" id="addWishModal">
+                    <div class="add-wish-modal-content">
+                        <span class="add-wish-modal-close">&times;</span>
+                        <h3>许下美好愿望</h3>
+                        <form id="addWishForm">
+                            <div class="form-group">
+                                <label>愿望类型：</label>
+                                <select id="wishTypeSelect">
+                                    <option value="💝">生日祝福</option>
+                                    <option value="❤️">爱意表达</option>
+                                    <option value="🌟">美好祝愿</option>
+                                    <option value="🎯">未来期望</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>愿望内容：</label>
+                                <textarea id="wishContentInput" placeholder="写下你的祝福..." rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>署名：</label>
+                                <input type="text" id="wishAuthorInput" placeholder="你的名字（可选）">
+                            </div>
+                            <button type="submit" class="submit-wish-btn">✨ 送上祝福</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="countdown" class="page-section">
+            <div class="countdown-container">
+                <h2 class="section-title">生日倒计时</h2>
+                <div class="countdown-display" id="countdownDisplay">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">天</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">时</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">分</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">秒</div>
+                    </div>
+                </div>
+                <div class="birthday-message">
+                    <p>距离Zilin的生日还有</p>
+                    <p class="birthday-date">2025年7月28日 00：00</p>
+                    <button class="test-fireworks-btn" id="testFireworksBtn" style="margin-top: 2rem; padding: 0.8rem 2rem; background: var(--romantic-pink); color: white; border: none; border-radius: 25px; cursor: pointer;">🎆 预览生日烟花</button>
+                </div>
+                <div class="fireworks-container" id="fireworksContainer" style="display: none;">
+                    <canvas id="fireworksCanvas"></canvas>
+                    <div class="birthday-surprise">
+                        <h1>🎂 生日快乐！🎉</h1>
+                        <p>亲爱的Zilin，愿你的每一天都充满阳光和笑容！</p>
+                        <button class="surprise-btn" id="viewSpecialAlbum">查看生日专属相册</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="games" class="page-section">
+            <div class="games-container">
+                <h2 class="section-title">小游戏</h2>
+                <p class="games-subtitle">放松心情，享受游戏时光</p>
+                
+                <div class="games-grid">
+                    <!-- 贪吃蛇 -->
+                    <div class="game-card" data-game="snake">
+                        <div class="game-icon">🐍</div>
+                        <h3>贪吃蛇</h3>
+                        <p>经典的贪吃蛇游戏</p>
+                        <div class="game-stats">
+                            <span>最高分 <span id="snakeHighScore">0</span></span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+                    
+                    <!-- 俄罗斯方块 -->
+                    <div class="game-card" data-game="tetris">
+                        <div class="game-icon">🧱</div>
+                        <h3>俄罗斯方块</h3>
+                        <p>经典的方块消除游戏</p>
+                        <div class="game-stats">
+                            <span>最高分 <span id="tetrisHighScore">0</span></span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 游戏模态框 -->
+            <div class="game-modal" id="gameModal">
+                <div class="game-modal-content">
+                    <span class="game-modal-close">&times;</span>
+                    <div id="gameContent"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部生日倒计时悬浮球 -->
+    <div class="floating-countdown" id="floatingCountdown">🎂 生日倒计时</div>
+
+    <!-- 音乐控制面板 -->
+    <div class="music-control-panel" id="musicControlPanel">
+        <div class="music-controls">
+            <button class="music-btn" id="musicToggle" title="播放/暂停背景音乐">
+                <span class="music-icon">🎵</span>
+            </button>
+            <button class="music-btn" id="volumeToggle" title="音量控制">
+                <span class="volume-icon">🔊</span>
+            </button>
+            <div class="volume-slider-container" id="volumeSliderContainer">
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+            </div>
+        </div>
+        <div class="now-playing" id="nowPlaying">🎶 优雅背景音乐</div>
+    </div>
+
+    <!-- 音频元素 -->
+    <audio id="backgroundMusic" loop preload="metadata">
+        <source src="https://www.soundjay.com/misc/sounds/magic-chime-02.mp3" type="audio/mpeg">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_multimedia_game_sound_bright_bell_chime_001_44712.mp3" type="audio/mpeg">
+        <!-- 备用本地音乐文件 -->
+        <source src="audio/background-music.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <!-- 烟花音效 -->
+    <audio id="fireworkLaunch" preload="auto">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_warfare_firework_rocket_launch_001_44837.mp3" type="audio/mpeg">
+        <source src="audio/firework-launch.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="fireworkExplosion1" preload="auto">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_warfare_firework_explosion_001_44838.mp3" type="audio/mpeg">
+        <source src="audio/firework-explosion1.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="fireworkExplosion2" preload="auto">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_warfare_firework_explosion_002_44839.mp3" type="audio/mpeg">
+        <source src="audio/firework-explosion2.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="fireworkExplosion3" preload="auto">
+        <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/zapsplat_warfare_firework_explosion_003_44840.mp3" type="audio/mpeg">
+        <source src="audio/firework-explosion3.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 生日快乐音乐 -->
+    <audio id="birthdayMusic" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/happy-birthday-song.mp3" type="audio/mpeg">
+        <source src="audio/happy-birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

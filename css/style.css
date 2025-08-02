@@ -1,0 +1,1986 @@
+/* 全局样式和主题变量 */
+:root {
+    --main-purple: #9B5DE5;
+    --romantic-pink: #F15BB5;
+    --magic-gold: #FEE440;
+    --bg-deep-purple: #1A0933;
+    --white: #fff;
+    --text-main: #fff;
+    --text-secondary: #FEE440;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kalam', 'Dancing Script', '思源宋体', 'Arial', sans-serif;
+    background: var(--bg-deep-purple);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 确保页面从顶部开始 */
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    scroll-padding-top: 120px;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(26, 9, 51, 0.98) 0%, rgba(155, 93, 229, 0.15) 100%);
+    padding: 0.5rem 2rem;
+    backdrop-filter: blur(15px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(155, 93, 229, 0.2);
+    flex-direction: column;
+    gap: 1rem;
+}
+.top-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(241, 91, 181, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(155, 93, 229, 0.1) 0%, transparent 50%);
+    z-index: -1;
+}
+.top-nav .logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: var(--main-purple);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.top-nav .menu {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.top-nav .menu li {
+    position: relative;
+}
+.top-nav .menu li a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 120px;
+    text-align: center;
+}
+.top-nav .menu li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--romantic-pink), var(--magic-gold));
+    border-radius: 30px;
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+.top-nav .menu li a:hover::before {
+    width: 100%;
+}
+.top-nav .menu li a:hover {
+    color: var(--white);
+    transform: translateY(-3px) scale(1.05);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(241, 91, 181, 0.4);
+}
+
+.progress-indicator {
+    position: fixed;
+    right: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+}
+.progress-indicator ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.progress-indicator li {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--main-purple);
+    margin: 12px 0;
+    border: 2px solid var(--magic-gold);
+    transition: background 0.3s, border 0.3s;
+    cursor: pointer;
+}
+.progress-indicator li.active {
+    background: var(--romantic-pink);
+    border-color: var(--white);
+}
+
+main {
+    margin-top: 70px;
+}
+.page-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    background: transparent;
+}
+
+.floating-countdown {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--main-purple);
+    color: var(--white);
+    padding: 0.7em 2em;
+    border-radius: 2em;
+    box-shadow: 0 4px 16px rgba(241,91,181,0.15);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 101;
+    transition: background 0.2s;
+}
+.floating-countdown:hover {
+    background: var(--romantic-pink);
+}
+
+/* ===== 魔镜主页功能 ===== */
+.mirror-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 40%, rgba(155,93,229,0.15) 0%, transparent 80%);
+    z-index: 1;
+}
+#starfield {
+    position: absolute;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+}
+.magic-mirror-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding-top: 100px;
+}
+.magic-mirror {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mirror-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 340px; height: 440px;
+    background: radial-gradient(circle, var(--main-purple) 0%, transparent 80%);
+    filter: blur(32px);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0.5;
+    pointer-events: none;
+}
+.mirror-face {
+    position: relative;
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #fff 60%, #f1e6ff 100%);
+    border-radius: 50% 50% 48% 52%/55% 45% 55% 45%;
+    box-shadow: 0 8px 32px 0 rgba(155,93,229,0.25), 0 1.5px 0 0 var(--magic-gold) inset;
+    border: 6px solid var(--main-purple);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: mirror-breath 3s ease-in-out infinite;
+}
+@keyframes mirror-breath {
+    0%, 100% { box-shadow: 0 8px 32px 0 rgba(155,93,229,0.25), 0 1.5px 0 0 var(--magic-gold) inset; }
+    50% { box-shadow: 0 16px 48px 0 rgba(241,91,181,0.18), 0 3px 0 0 var(--magic-gold) inset; }
+}
+.mirror-breath {
+    width: 100%; height: 100%;
+    position: absolute; left: 0; top: 0;
+    border-radius: inherit;
+    pointer-events: none;
+}
+.mirror-response {
+    position: absolute;
+    bottom: 5px; left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(155,93,229,0.12);
+    color: var(--main-purple);
+    font-size: 1.1rem;
+    text-align: center;
+    border-radius: 1em;
+    padding: 1em 0.5em;
+    box-shadow: 0 2px 8px rgba(155,93,229,0.08);
+    opacity: 0.95;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+    font-family: 'Pacifico', cursive, '思源宋体', Arial, sans-serif;
+    letter-spacing: 2px;
+    overflow: visible;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mirror-response.animate {
+    animation: mirror-response-pop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes mirror-response-pop {
+    0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
+    60% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.95; }
+}
+
+/* 文字烟花特效 */
+.text-sparkle {
+    position: relative;
+}
+
+.text-sparkle::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    background: radial-gradient(circle at 10% 20%, rgba(241, 91, 181, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(155, 93, 229, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(254, 228, 64, 0.8) 0%, transparent 50%);
+    animation: sparkle-glow 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.sparkle-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #FFD700, #FF69B4, #9B5DE5);
+    border-radius: 50%;
+    animation: sparkle-float 1.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes sparkle-glow {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes sparkle-float {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(0);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.3);
+    }
+}
+.mirror-input-form {
+    display: flex;
+    gap: 0.5em;
+    margin-top: 2.5rem;
+    justify-content: center;
+}
+.mirror-input-form input[type="text"] {
+    padding: 0.7em 1em;
+    border-radius: 2em;
+    border: 2px solid var(--main-purple);
+    outline: none;
+    font-size: 1rem;
+    min-width: 220px;
+    background: #fff;
+    color: var(--main-purple);
+    transition: border 0.2s;
+}
+.mirror-input-form input[type="text"]:focus {
+    border-color: var(--romantic-pink);
+}
+.mirror-input-form button {
+    background: var(--main-purple);
+    color: #fff;
+    border: none;
+    border-radius: 2em;
+    padding: 0.7em 1.2em;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.mirror-input-form button:hover {
+    background: var(--romantic-pink);
+}
+
+/* 魔镜操作提示 */
+.mirror-tips {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.mirror-tips p {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.tips-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.tip-btn {
+    background: rgba(155, 93, 229, 0.2);
+    color: var(--white);
+    border: 1px solid var(--main-purple);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tip-btn:hover {
+    background: var(--main-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(155, 93, 229, 0.3);
+}
+
+/* ===== 童话故事书样式 ===== */
+.storybook-container {
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: var(--romantic-pink);
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 8px rgba(241, 91, 181, 0.3);
+}
+
+.flipbook {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    margin-bottom: 2rem;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fff 0%, #f9f5ff 100%);
+    border: 2px solid var(--main-purple);
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 20px rgba(155, 93, 229, 0.2);
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    backface-visibility: hidden;
+}
+
+.page-content {
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--main-purple);
+}
+
+.page-content h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: var(--romantic-pink);
+    margin-bottom: 1rem;
+}
+
+.page-content h3 {
+    font-size: 1.8rem;
+    color: var(--main-purple);
+    margin-bottom: 1.5rem;
+}
+
+.page-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.page-cover {
+    background: linear-gradient(135deg, var(--main-purple) 0%, var(--romantic-pink) 100%);
+    color: var(--white);
+}
+
+.page-cover .page-content h1,
+.page-cover .page-content p {
+    color: var(--white);
+}
+
+.cover-decoration,
+.page-decoration {
+    font-size: 3rem;
+    margin-top: 2rem;
+}
+
+.page-back {
+    background: linear-gradient(135deg, var(--romantic-pink) 0%, var(--magic-gold) 100%);
+}
+
+.page-back .page-content p {
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.flipbook-controls {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1000;
+}
+
+.flip-btn {
+    background: var(--main-purple);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.flip-btn:hover:not(:disabled) {
+    background: var(--romantic-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(241, 91, 181, 0.3);
+}
+
+.flip-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-indicator {
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+/* ===== 心动相册样式 ===== */
+.album-container {
+    width: 95%;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.timeline-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.timeline-btn {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--main-purple);
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.timeline-btn:hover,
+.timeline-btn.active {
+    background: var(--main-purple);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(155, 93, 229, 0.3);
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.photo-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(155, 93, 229, 0.3);
+}
+
+.photo-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.photo-item:hover img {
+    transform: scale(1.1);
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 9, 51, 0.9) 0%, transparent 100%);
+    color: var(--white);
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.photo-item:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+.photo-date {
+    font-size: 0.9rem;
+    color: var(--magic-gold);
+    margin-bottom: 0.5rem;
+}
+
+.photo-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.photo-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* 照片模态框 */
+.photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    margin-top: 5vh;
+    animation: zoomIn 0.3s;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+.modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: var(--white);
+    padding: 1rem 0;
+    font-size: 1.2rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: var(--white);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--romantic-pink);
+}
+
+/* 瀑布流效果 */
+@media (min-width: 768px) {
+    .photo-item:nth-child(4n+1) {
+        grid-row: span 2;
+    }
+    
+    .photo-item:nth-child(4n+3) {
+        grid-column: span 2;
+    }
+}
+
+/* ===== 生日倒计时样式 ===== */
+.countdown-container {
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    background: rgba(155, 93, 229, 0.1);
+    border: 2px solid var(--main-purple);
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    min-width: 120px;
+    transition: all 0.3s;
+}
+
+.countdown-item:hover {
+    background: rgba(155, 93, 229, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(155, 93, 229, 0.3);
+}
+
+.countdown-number {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--romantic-pink);
+    font-family: 'Pacifico', cursive;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(241, 91, 181, 0.3);
+}
+
+.countdown-label {
+    font-size: 1.2rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.birthday-message {
+    margin-top: 3rem;
+}
+
+.birthday-message p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--white);
+}
+
+.birthday-date {
+    font-size: 2rem !important;
+    color: var(--magic-gold) !important;
+    font-family: 'Pacifico', cursive;
+}
+
+/* 烟花容器 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(26, 9, 51, 0.95);
+}
+
+#fireworksCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.birthday-surprise {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1001;
+    animation: surprisePopup 0.5s ease-out;
+}
+
+@keyframes surprisePopup {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.birthday-surprise h1 {
+    font-size: 4rem;
+    color: var(--magic-gold);
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.birthday-surprise p {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 2rem;
+}
+
+.surprise-btn {
+    background: linear-gradient(135deg, var(--main-purple) 0%, var(--romantic-pink) 100%);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(155, 93, 229, 0.3);
+}
+
+.surprise-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 91, 181, 0.4);
+}
+
+/* 悬浮倒计时更新 */
+.floating-countdown.birthday-today {
+    background: linear-gradient(135deg, var(--romantic-pink) 0%, var(--magic-gold) 100%);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+/* ===== 祝福星愿墙样式 ===== */
+.wishes-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.wishes-subtitle {
+    color: var(--white);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.wish-stars-canvas {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    cursor: pointer;
+    z-index: 1;
+    display: block;
+    margin: 2rem 0;
+}
+
+.wish-controls {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.wish-btn {
+    background: linear-gradient(135deg, var(--main-purple) 0%, var(--romantic-pink) 100%);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(155, 93, 229, 0.3);
+}
+
+.wish-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(241, 91, 181, 0.4);
+}
+
+/* 愿望卡片模态框 */
+.wish-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s;
+}
+
+.wish-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+.wish-card {
+    background: linear-gradient(135deg, rgba(155, 93, 229, 0.95) 0%, rgba(241, 91, 181, 0.9) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.wish-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.wish-type {
+    font-size: 2rem;
+}
+
+.wish-card h3 {
+    color: var(--white);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.wish-card-body p {
+    color: var(--white);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.wish-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.wish-modal-close {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    color: var(--white);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.wish-modal-close:hover {
+    color: var(--magic-gold);
+}
+
+/* 添加愿望模态框 */
+.add-wish-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s;
+}
+
+.add-wish-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-deep-purple);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--main-purple);
+}
+
+.add-wish-modal h3 {
+    color: var(--romantic-pink);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--main-purple);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--romantic-pink);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-wish-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--main-purple) 0%, var(--romantic-pink) 100%);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-wish-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 91, 181, 0.4);
+}
+
+.add-wish-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--white);
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.add-wish-modal-close:hover {
+    color: var(--romantic-pink);
+}
+
+/* ===== 小游戏区样式 ===== */
+.games-container {
+    width: 95%;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.games-subtitle {
+    color: var(--white);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.game-card {
+    background: linear-gradient(135deg, rgba(155, 93, 229, 0.1) 0%, rgba(241, 91, 181, 0.1) 100%);
+    border: 2px solid var(--main-purple);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--romantic-pink);
+    box-shadow: 0 15px 35px rgba(155, 93, 229, 0.3);
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    color: var(--romantic-pink);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-card p {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.game-stats {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--magic-gold);
+}
+
+.play-btn {
+    background: linear-gradient(135deg, var(--main-purple) 0%, var(--romantic-pink) 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 91, 181, 0.4);
+}
+
+/* 游戏模态框 */
+.game-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+.game-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-deep-purple);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--main-purple);
+}
+
+.game-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--white);
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.game-modal-close:hover {
+    color: var(--romantic-pink);
+}
+
+/* 贪吃蛇游戏样式 */
+.snake-game {
+    text-align: center;
+}
+
+.snake-canvas {
+    border: 2px solid var(--main-purple);
+    border-radius: 10px;
+    background: #000;
+    margin: 1rem auto;
+    display: block;
+}
+
+.snake-controls {
+    color: var(--white);
+    margin-top: 1rem;
+}
+
+.snake-score {
+    color: var(--magic-gold);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.control-btn {
+    background: var(--main-purple);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--romantic-pink);
+}
+
+/* 俄罗斯方块游戏样式 */
+.tetris-game {
+    text-align: center;
+}
+
+.tetris-canvas {
+    border: 2px solid var(--main-purple);
+    border-radius: 10px;
+    background: #000;
+    margin: 1rem auto;
+    display: block;
+}
+
+.tetris-score {
+    color: var(--magic-gold);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* 游戏界面通用样式 */
+.game-header {
+    margin-bottom: 1.5rem;
+}
+
+.game-header h3 {
+    color: var(--romantic-pink);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.game-info span {
+    background: rgba(155, 93, 229, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--main-purple);
+}
+
+#snakeCanvas, #tetrisCanvas {
+    border: 2px solid var(--main-purple);
+    border-radius: 10px;
+    background: #000;
+    margin: 1rem auto;
+    display: block;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.game-controls button {
+    background: var(--main-purple);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.game-controls button:hover:not(:disabled) {
+    background: var(--romantic-pink);
+    transform: translateY(-2px);
+}
+
+.game-controls button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.game-instructions {
+    color: var(--white);
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.game-instructions p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+/* 俄罗斯方块特有样式 */
+.tetris-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.tetris-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.next-piece {
+    background: rgba(155, 93, 229, 0.1);
+    border: 1px solid var(--main-purple);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.next-piece h4 {
+    color: var(--magic-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+#nextPieceCanvas {
+    border: 1px solid var(--main-purple);
+    border-radius: 5px;
+    background: #000;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .game-modal-content {
+        width: 95%;
+        padding: 1rem;
+        max-height: 90vh;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .game-controls {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .game-controls button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .tetris-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    #snakeCanvas {
+        width: 300px;
+        height: 300px;
+    }
+    
+    #tetrisCanvas {
+        width: 250px;
+        height: 500px;
+    }
+    
+    .game-instructions {
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== 生日主题字体样式 ===== */
+
+/* 主标题使用华丽的手写字体 */
+.section-title {
+    font-family: 'Great Vibes', 'Dancing Script', serif !important;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, var(--romantic-pink), var(--magic-gold), var(--main-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        filter: drop-shadow(0 0 5px rgba(241, 91, 181, 0.3));
+    }
+    to {
+        filter: drop-shadow(0 0 15px rgba(241, 91, 181, 0.6));
+    }
+}
+
+/* 导航菜单使用可爱字体 */
+.top-nav .menu a {
+    font-family: 'Caveat', 'Dancing Script', cursive !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.top-nav .menu a:hover {
+    color: var(--romantic-pink);
+    text-shadow: 0 0 10px rgba(241, 91, 181, 0.5);
+    transform: scale(1.05);
+}
+
+/* Logo使用特殊字体 */
+.logo {
+    font-family: 'Sacramento', 'Great Vibes', cursive !important;
+    font-size: 2rem !important;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--romantic-pink), var(--magic-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 魔镜回应使用手写字体 */
+.mirror-response {
+    font-family: 'Dancing Script', 'Kalam', cursive !important;
+    font-weight: 500;
+    font-size: 1.3rem !important;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 故事书内容使用优雅字体 */
+.page-content h1 {
+    font-family: 'Great Vibes', serif !important;
+    font-size: 3rem !important;
+    background: linear-gradient(45deg, var(--romantic-pink), var(--magic-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.page-content h3 {
+    font-family: 'Caveat', 'Dancing Script', cursive !important;
+    font-weight: 700;
+    font-size: 2rem !important;
+    color: var(--romantic-pink);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.page-content p {
+    font-family: 'Kalam', 'Dancing Script', serif !important;
+    font-weight: 400;
+    font-size: 1.1rem !important;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 生日倒计时数字使用特殊字体 */
+.countdown-number {
+    font-family: 'Amatic SC', 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, var(--magic-gold), var(--romantic-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.countdown-label {
+    font-family: 'Dancing Script', cursive !important;
+    font-weight: 600;
+    font-size: 1.2rem !important;
+    color: var(--white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 生日快乐标题 */
+.birthday-surprise h1 {
+    font-family: 'Great Vibes', serif !important;
+    font-size: 4rem !important;
+    background: linear-gradient(45deg, #FFD700, #FF69B4, #9370DB, #00CED1);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: birthdayGradient 3s ease infinite, birthdayBounce 2s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+@keyframes birthdayGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes birthdayBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+}
+
+/* 祝福内容使用温馨字体 */
+.birthday-message p {
+    font-family: 'Dancing Script', 'Kalam', cursive !important;
+    font-weight: 500;
+    font-size: 1.4rem !important;
+    line-height: 1.6;
+    color: var(--white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.birthday-date {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+    color: var(--magic-gold) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 按钮文字使用可爱字体 */
+.play-btn, .wish-btn, .flip-btn, .surprise-btn {
+    font-family: 'Caveat', 'Dancing Script', cursive !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 游戏标题使用有趣字体 */
+.game-card h3 {
+    font-family: 'Amatic SC', 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    font-size: 2.2rem !important;
+}
+
+.game-header h3 {
+    font-family: 'Amatic SC', 'Caveat', cursive !important;
+    font-weight: 700 !important;
+}
+
+/* 照片说明使用柔和字体 */
+.photo-title {
+    font-family: 'Dancing Script', cursive !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+}
+
+.photo-description {
+    font-family: 'Kalam', serif !important;
+    font-weight: 400 !important;
+    line-height: 1.5;
+}
+
+/* 祝福卡片使用温馨字体 */
+.wish-card h3 {
+    font-family: 'Great Vibes', cursive !important;
+    font-weight: 600 !important;
+    font-size: 1.8rem !important;
+}
+
+.wish-card p {
+    font-family: 'Dancing Script', 'Kalam', serif !important;
+    font-weight: 400 !important;
+    font-size: 1.2rem !important;
+    line-height: 1.6;
+}
+
+/* 提示按钮使用可爱字体 */
+.tip-btn {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+}
+
+/* 悬浮倒计时使用特殊字体 */
+.floating-countdown {
+    font-family: 'Dancing Script', cursive !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 为所有文本添加流畅的过渡效果 */
+* {
+    transition: font-size 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* 移动端字体适配 */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .logo {
+        font-size: 1.5rem !important;
+    }
+    
+    .birthday-surprise h1 {
+        font-size: 2.5rem !important;
+    }
+    
+    .page-content h1 {
+        font-size: 2rem !important;
+    }
+    
+    .page-content h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .game-card h3 {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ===== 音乐控制面板样式 ===== */
+.music-control-panel {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background: linear-gradient(135deg, rgba(155, 93, 229, 0.9), rgba(241, 91, 181, 0.8));
+    border: 2px solid var(--main-purple);
+    border-radius: 20px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.music-control-panel:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 12px 40px rgba(155, 93, 229, 0.4);
+}
+
+.music-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.music-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    backdrop-filter: blur(5px);
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: var(--magic-gold);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(254, 228, 64, 0.5);
+}
+
+.music-btn.active {
+    background: var(--magic-gold);
+    border-color: var(--magic-gold);
+    color: var(--bg-deep-purple);
+}
+
+.music-btn.active:hover {
+    background: var(--romantic-pink);
+    border-color: var(--romantic-pink);
+}
+
+.volume-slider-container {
+    position: relative;
+    display: none;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.volume-slider-container.show {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    width: 80px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    cursor: pointer;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--magic-gold);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: var(--romantic-pink);
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--magic-gold);
+    cursor: pointer;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.now-playing {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+    margin-top: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.music-control-panel:hover .now-playing {
+    opacity: 1;
+}
+
+/* 音乐播放动画 */
+.music-icon.playing {
+    animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* 音量图标动画 */
+.volume-icon.animating {
+    animation: volumeWave 0.5s ease-in-out;
+}
+
+@keyframes volumeWave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 移动端音乐控制适配 */
+@media (max-width: 768px) {
+    .music-control-panel {
+        right: 10px;
+        padding: 0.8rem;
+        min-width: 50px;
+    }
+    
+    .music-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .volume-slider {
+        width: 60px;
+    }
+    
+    .now-playing {
+        font-size: 0.8rem;
+    }
+}
+
+/* 音乐加载状态 */
+.music-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.music-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: musicLoading 1.5s infinite;
+}
+
+@keyframes musicLoading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 1rem 1rem;
+        gap: 0.8rem;
+    }
+    
+    .top-nav .logo {
+        font-size: 2rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .top-nav .menu {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .top-nav .menu li a {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        min-width: 100px;
+    }
+    
+    html, body {
+        scroll-padding-top: 100px;
+    }
+}
+    .progress-indicator {
+        right: 1vw;
+    }
+    .page-section {
+        font-size: 1.2rem;
+        padding: 2rem 0;
+    }
+    
+    .flipbook {
+        width: 90vw;
+        max-width: 400px;
+        height: 60vw;
+        max-height: 300px;
+    }
+    
+    .page-content {
+        padding: 2rem;
+    }
+    
+    .page-content h1 {
+        font-size: 2rem;
+    }
+    
+    .page-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .page-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .magic-mirror {
+        width: 90vw;
+        height: 60vw;
+        max-width: 320px;
+        max-height: 420px;
+    }
+    .magic-mirror-container {
+        min-height: 50vh;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .flipbook-controls {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .flip-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
